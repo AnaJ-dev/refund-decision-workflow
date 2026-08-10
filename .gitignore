@@ -1,0 +1,22 @@
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Local n8n data
+.n8n/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Explicit secret/credential files
+credentials.json
+credentials-*.json
+secrets.json
+secrets-*.json
