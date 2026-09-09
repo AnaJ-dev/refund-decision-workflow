@@ -1,8 +1,39 @@
-## Process Maps
+Refund Decision Workflow
 
-### Before Automation
+Project Overview
 
-```mermaid
+An n8n workflow that automates refund-request decisions using validation, normalisation, business rules and manual-review routing.
+
+Business Rules
+
+Missing required fields → invalid response
+
+Previous refund request → manual review
+
+Purchase amount of 500 or more → manual review
+
+Subscription renewal → manual review
+
+Other / unclear reason → manual review
+
+Faulty item within 45 days → approved
+
+Wrong item within 45 days → approved
+
+Change of mind within 21 days and unopened → approved
+
+Change of mind within 21 days but opened → rejected
+
+Outside the allowed time limit → rejected
+
+Workflow
+
+The workflow receives the request, validates and normalises the data, applies manual-review rules, checks refund eligibility, and returns a structured decision.
+
+Process Maps
+
+Before Automation
+
 flowchart TD
     customerRequest[Customer sends a refund request]
     staffCheck[Staff checks the request details]
@@ -24,11 +55,9 @@ flowchart TD
     approveRefund --> recordDecision
     rejectRefund --> recordDecision
     manualReview --> recordDecision
-```
 
-### After Automation
+After Automation
 
-```mermaid
 flowchart TD
     receiveRequest[Receive refund request]
     extractFields[Extract request fields]
@@ -69,4 +98,3 @@ flowchart TD
 
     openedRule -->|Yes| openedRejection
     openedRule -->|No| timeLimitRejection
-```
